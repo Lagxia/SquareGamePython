@@ -1,13 +1,9 @@
-import Interface.plateau
-
-from tkinter import Tk, Canvas, Frame, BOTH
+from Interface.plateau import Plateau
+import tkinter as tk
 
 def main():
-    root = Tk()
-    canvas = Tk.Canvas(root, width=450, height=450, bg='white')
-    canvas.pack()
-    ex = Interface.plateau.Plateau()
-    root.mainloop()
+    plateau = Plateau()
+    root = plateau.root
 
 if __name__ == '__main__':
     main()
