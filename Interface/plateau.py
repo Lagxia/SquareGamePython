@@ -1,33 +1,52 @@
-from tkinter import Canvas, Tk, BOTH
+from tkinter import *
+import random
 
 class Plateau():
 
-    def DrawGrid(self, event=None):
-        # Get current width of canvas
-        w = self._set_canvas.winfo_width()
-        # Get current height of canvas
-        h = self._set_canvas.winfo_height()
-        # Will only remove the grid_line
-        self._set_canvas.delete('grid_line')
+    def __colorGet(self):
+        colorList = [
+            "#a12b0d",
+            "#852006",
+            "#d28639",
+            "#b819f0",
+            "#f0cb2f",
+            "#f9f6c9",
+            "#ffccff",
+            "#eecad0",
+            "#999966",
+            "#666666",
+            "#cccccc",
+            "#cbb3d0",
+            "#8d1a93",
+            "#afec57",
+            "#feffd1",
+            "#642d44"
+        ]
+        return colorList
 
-        # Creates all vertical lines at intevals of 100
-        for i in range(0, w, 100):
-            self._set_canvas.create_line([(i, 0), (i, h)], tag='grid_line')
+    def getRandowColor(self):
+        lengthLIst = self.__colorGet().__len__()
+        numRandom = random.randint(0, lengthLIst)
+        return self.__colorGet()[(numRandom - 1)]
 
-        # Creates all horizontal lines at intevals of 100
-        for i in range(0, h, 100):
-            self._set_canvas.create_line([(0, i), (w, i)], tag='grid_line')
-
-        print("Coucou")
+    def drawGrid(self):
+        # i & j = grid size || i = vertical size || j = horizontal size
+        for i in range(15):
+            for j in range(35):
+                rectangle = Frame(self.root, highlightbackground=self.getRandowColor(), width=40, height=40, highlightthickness=3)
+                b = rectangle
+                b.grid(row=i, column=j, sticky="ns")
 
     def get_root(self):
         return self.root
 
     def __init__(self):
-        self. root = Tk()
-        self._set_canvas = Canvas(self.root, height=1000, width=1000, bg='white')
-        self._set_canvas.pack(fill=BOTH, expand=True)
-        self._set_canvas.bind('<Configure>', self.DrawGrid)
+        self.root = Tk()
+
+        self.root.title("Square Game")
+
+        self.drawGrid()
+
         self.root.mainloop()
 
 
